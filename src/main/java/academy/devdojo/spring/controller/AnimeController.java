@@ -1,7 +1,7 @@
-package academy.devdojo.controller;
+package academy.devdojo.spring.controller;
 
-import academy.devdojo.domain.Anime;
-import academy.devdojo.util.DateUtil;
+import academy.devdojo.spring.domain.Anime;
+import academy.devdojo.spring.util.DateUtil;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -21,6 +21,6 @@ public class AnimeController {
     @RequestMapping("/list")
     public List<Anime> list(){
         log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
-        return  List.of(new Anime("Black Clover"), new Anime("Steins Gate"));
+        return  List.of(new Anime("Black Clover"), new Anime("Steins Gate"), new Anime("One Piece "));
     }
 }

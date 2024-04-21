@@ -1,4 +1,4 @@
-package academy.devdojo.domain;
+package academy.devdojo.spring.domain;
 
 public class Anime {
     private String name;
