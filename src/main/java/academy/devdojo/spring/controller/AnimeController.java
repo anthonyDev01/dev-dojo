@@ -1,6 +1,7 @@
 package academy.devdojo.spring.controller;
 
 import academy.devdojo.spring.domain.Anime;
+import academy.devdojo.spring.dtos.AnimeRequestDTO;
 import academy.devdojo.spring.service.AnimeService;
 import academy.devdojo.spring.util.DateUtil;
 import lombok.AllArgsConstructor;
@@ -34,19 +35,20 @@ public class AnimeController {
     }
 
     @PostMapping
-    public ResponseEntity<Anime> save(@RequestBody Anime anime){
-        return new ResponseEntity<>(animeService.save(anime), HttpStatus.CREATED);
+    public ResponseEntity<Anime> save(@RequestBody AnimeRequestDTO animeRequestDTO){
+        Anime anime = this.animeService.save(animeRequestDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(anime);
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") long id){
-        animeService.delete(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<Object> delete(@PathVariable("id") long id){
+        this.animeService.delete(id);
+        return ResponseEntity.status(HttpStatus.OK).body("Anime deleted successfully");
     }
 
-    @PutMapping
-    public ResponseEntity<Anime> replace(@RequestBody Anime anime){
-        animeService.replace(anime);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @PutMapping("/{idAnime}")
+    public ResponseEntity<Anime> replace(@PathVariable long idAnime, @RequestBody AnimeRequestDTO animeRequestDTO){
+        Anime anime = this.animeService.replace(idAnime, animeRequestDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(anime);
     }
 }
